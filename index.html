@@ -22,10 +22,10 @@
         </a-assets>
 
         <!-- Configuración de la vista estereoscópica -->
-        <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.6 0"></a-entity>
+        <a-entity camera position="0 1.6 0" look-controls wasd-controls></a-entity>
 
-        <!-- Cambiando la imagen a una esfera -->
-        <a-sphere radius="100" src="#salinas" material="side: double"></a-sphere>
+        <!-- Fondo para la vista estereoscópica -->
+        <a-sky src="#salinas" stereo="true"></a-sky>
 
         <!-- Opcional: Si deseas mostrar un video -->
         <!--<a-video src="#pruebaVideo" width="16" height="9" position="0 2 -5"></a-video>-->
