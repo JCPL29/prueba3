@@ -22,7 +22,10 @@
         </a-assets>
 
         <!-- Configuración de la vista estereoscópica -->
-        <a-entity camera position="0 1.6 0" look-controls wasd-controls></a-entity>
+        <a-entity position="0 1.6 0">
+            <a-entity camera="eye:left" look-controls wasd-controls></a-entity>
+            <a-entity camera="eye:right" look-controls wasd-controls></a-entity>
+        </a-entity>
 
         <!-- Fondo para cada ojo -->
         <a-sky src="#salinas" stereo="eye:left"></a-sky>
