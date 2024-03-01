@@ -12,7 +12,41 @@
         <a-entity camera look-controls></a-entity>
 
         <!-- Añadir el video de YouTube -->
-        <a-videosphere src="https://www.youtube.com/watch?v=H9r8CTsSf4U&autoplay=1" rotation="0 -90 0"></a-videosphere>
+        <a-entity id="youtube-video"
+                  geometry="primitive: plane; width: 16; height: 9"
+                  material="shader: flat; src: #videoTexture"
+                  position="0 2 -5"></a-entity>
     </a-scene>
+
+    <script>
+        // Cargar la API de YouTube IFrame
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Función para crear el reproductor de YouTube
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-video', {
+                height: '390',
+                width: '640',
+                videoId: 'H9r8CTsSf4U', // Reemplazar con el ID del video de YouTube
+                playerVars: {
+                    'controls': 0,
+                    'showinfo': 0,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        // Función que se ejecuta cuando el reproductor de YouTube está listo
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+    </script>
 </body>
 </html>
