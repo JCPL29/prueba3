@@ -17,6 +17,7 @@
             <img src="Texturas/sky.jpeg" id="sky">
             <img src="Texturas/entrada salinas.jpg" id="salinas">
             <video id="pruebaVideo" autoplay loop="true" src="Texturas/moto.mp4"></video>
+            <video id="video2" autoplay loop="true" src="Texturas/moto2.webm"></video>
         </a-assets>
 
         <!-- Configuración de la vista estereoscópica -->
@@ -25,7 +26,9 @@
         </a-entity>
 
         <!-- Esfera que contiene el video -->
-        <a-sphere radius="100" material="shader: flat; side: back; src: #pruebaVideo"></a-sphere>
+        <a-sphere radius="100">
+            <a-video src="#video2" autoplay loop></a-video>
+        </a-sphere>
 
         <!-- Añadir cursor -->
         <a-entity cursor="rayOrigin: mouse"></a-entity>
@@ -34,3 +37,4 @@
 </body>
 
 </html>
+
