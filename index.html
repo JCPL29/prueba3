@@ -12,7 +12,7 @@
 
 <body>
 
-    <a-scene>
+    <a-scene vr-mode-ui="enabled: true">
 
         <a-assets>
             <img src="Texturas/meteor.jpeg" id="meteor">
@@ -21,15 +21,19 @@
             <video id="pruebaVideo" autoplay loop="true" src="Texturas/moto.mp4"></video>
         </a-assets>
 
-        <a-sky src="#salinas"></a-sky>
+        <!-- Configuración de la vista estereoscópica -->
+        <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 1.6 0"></a-entity>
+
+        <!-- Cambiando la imagen a una esfera -->
+        <a-sphere radius="100" src="#salinas" material="side: double"></a-sphere>
+
+        <!-- Opcional: Si deseas mostrar un video -->
         <!--<a-video src="#pruebaVideo" width="16" height="9" position="0 2 -5"></a-video>-->
 
-        <a-entity position="0 1.6 0">
-            <a-camera stereo="eye: left"></a-camera>
-            <a-entity cursor="rayOrigin: mouse"></a-entity>
-        </a-entity>
-
-        <!--cambioprueba-->
+        <!-- Añadir cursor -->
+        <a-entity cursor="rayOrigin: mouse"></a-entity>
     </a-scene>
-   
+
 </body>
+
+</html>
