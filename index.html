@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PruebaVR</title>
+    <title>Video de VR de YouTube</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="js/app.js"></script>
 </head>
-
 <body>
+    <a-scene>
+        <!-- Configurar la cámara -->
+        <a-entity camera look-controls></a-entity>
 
-    <a-scene vr-mode-ui="enabled: true">
-
-        <a-assets>
-            <img src="Texturas/meteor.jpeg" id="meteor">
-            <img src="Texturas/sky.jpeg" id="sky">
-            <img src="Texturas/entrada salinas.jpg" id="salinas">
-            <video id="pruebaVideo" autoplay loop="true" src="Texturas/moto.mp4"></video>
-        </a-assets>
-
-        <!-- Configuración de la vista estereoscópica -->
-        <a-entity position="0 1.6 0">
-            <a-entity camera="eye:left" look-controls wasd-controls></a-entity>
-            <a-entity camera="eye:right" look-controls wasd-controls></a-entity>
-        </a-entity>
-
-        <!-- Fondo para cada ojo -->
-        <!--<a-sky src="#salinas" stereo="eye:left"></a-sky>
-        <a-sky src="#salinas" stereo="eye:right"></a-sky>-->
-
-        <!-- Opcional: Si deseas mostrar un video -->
-        <a-video src="#pruebaVideo" width="16" height="9" position="0 2 -5"></a-video>
-
-        <!-- Añadir cursor -->
-        <a-entity cursor="rayOrigin: mouse"></a-entity>
+        <!-- Añadir el video de YouTube -->
+        <a-videosphere src="https://www.youtube.com/watch?v=H9r8CTsSf4U&autoplay=1" rotation="0 -90 0"></a-videosphere>
     </a-scene>
-
 </body>
-
 </html>
