@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +7,6 @@
     <title>PruebaVR</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
-
 <body>
 
     <a-scene vr-mode-ui="enabled: true">
@@ -17,27 +15,61 @@
             <img src="Texturas/sky.jpeg" id="sky">
             <img src="Texturas/entrada salinas.jpg" id="salinas">
             <img src="Texturas/SemanaSanta.png" id="procesion">
-            
-            <!--<video id="pruebaVideo" autoplay loop="true" src="Texturas/moto.mp4"></video>
-            <video id="video2" autoplay loop="true" src="Texturas/moto2.webm"></video>-->
+            <img src="Texturas/prueba1.JPEG" id="material">
+            <video id="video" src="Texturas/videoSemanaSanta.mp4"></video>
         </a-assets>
 
         <!--entorno 360 (imagen)-->
         <a-sky src="#procesion"></a-sky>
-        <!-- Configuración de la vista estereoscópica
-        <a-entity position="0 1.6 0">
-            <a-entity camera="look-controls" universal-controls></a-entity>
-        </a-entity>-->
 
-        <!-- Esfera que contiene el video 
-        <a-sphere radius="100">
-            <a-sky src="#salinas" autoplay loop></a-sky>
-        </a-sphere>-->
+        <!-- Esfera para mostrar el video -->
+        <a-sphere id="sphere" geometry="primitive: sphere" radius="2" position="-30 10 -20" material="src: #material"></a-sphere>
+
+        <!-- Video que se muestra al hacer clic en la esfera -->
+        <a-video id="video-display" src="#video" position="-8 2 -5" rotation="0 45 0" visible="false" width="4" height="4"></a-video>
 
         <!-- Añadir cursor -->
         <a-entity cursor="rayOrigin: mouse"></a-entity>
-    </a-scene>
-    <!--cambio-->
-</body>
 
+        <!-- Script para mostrar el video al hacer clic en la esfera -->
+        <script>
+            document.getElementById('sphere').addEventListener('click', function() {
+                var videoDisplay = document.getElementById('video-display');
+                videoDisplay.setAttribute('visible', true);
+                
+                // Reproducir el video cuando el cuadro esté visible
+                var video = document.getElementById('video');
+                video.play();
+
+                // Animación de aparición gradual del cuadro de video
+                var opacity = 0;
+                var intervalId = setInterval(function() {
+                    if (opacity >= 1) {
+                        clearInterval(intervalId);
+                    } else {
+                        opacity += 0.05; // Ajusta la velocidad de la animación cambiando este valor
+                        videoDisplay.setAttribute('material', 'opacity', opacity);
+                    }
+                }, 50); // Ajusta la velocidad de la animación cambiando este valor
+
+                // Evento para ocultar el video cuando termine
+                video.addEventListener('ended', function() {
+                    opacity = 1;
+                    var intervalId = setInterval(function() {
+                        if (opacity <= 0) {
+                            clearInterval(intervalId);
+                            videoDisplay.setAttribute('visible', false);
+                        } else {
+                            opacity -= 0.05; // Ajusta la velocidad de la animación cambiando este valor
+                            videoDisplay.setAttribute('material', 'opacity', opacity);
+                        }
+                    }, 50); // Ajusta la velocidad de la animación cambiando este valor
+                });
+            });
+
+            // Evitar la reproducción automática del video al cargar la página
+            document.getElementById('video').autoplay = false;
+        </script>
+    </a-scene>
+</body>
 </html>
